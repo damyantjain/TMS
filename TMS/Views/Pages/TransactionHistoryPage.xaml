@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="TMS.Views.Pages.TransactionHistoryPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ListCollection="clr-namespace:System.Collections.Generic;assembly=netstandard"
+    xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+    xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:listView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" HorizontalOptions="FillAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="History"
+                    VerticalOptions="Center" />
+                <combobox:SfComboBox
+                    x:Name="NamePicker"
+                    Grid.Column="1"
+                    Margin="0"
+                    HeightRequest="40"
+                    HorizontalOptions="EndAndExpand"
+                    SelectionChanged="UserSelectionChanged"
+                    VerticalOptions="Start"
+                    Watermark="Name"
+                    WidthRequest="120">
+                    <combobox:SfComboBox.ComboBoxSource>
+                        <ListCollection:List x:TypeArguments="x:String">
+                            <x:String>All</x:String>
+                            <x:String>Damyant</x:String>
+                            <x:String>Manisha</x:String>
+                            <x:String>Kishan</x:String>
+                            <x:String>Test</x:String>
+                        </ListCollection:List>
+                    </combobox:SfComboBox.ComboBoxSource>
+                </combobox:SfComboBox>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label
+                    Grid.Column="0"
+                    FontSize="14"
+                    HorizontalOptions="Center"
+                    Text="Date"
+                    VerticalOptions="Center" />
+                <Label
+                    Grid.Column="1"
+                    FontSize="14"
+                    HorizontalOptions="Center"
+                    Text="Name"
+                    VerticalOptions="Center" />
+                <Label
+                    Grid.Column="2"
+                    FontSize="14"
+                    HorizontalOptions="Center"
+                    Text="Company"
+                    VerticalOptions="Center" />
+                <Label
+                    Grid.Column="3"
+                    FontSize="14"
+                    HorizontalOptions="Center"
+                    Text="Quantity"
+                    VerticalOptions="Center" />
+                <Label
+                    Grid.Column="4"
+                    FontSize="14"
+                    HorizontalOptions="Center"
+                    Text="Price"
+                    VerticalOptions="Center" />
+                <Label
+                    Grid.Column="5"
+                    FontSize="14"
+                    HorizontalOptions="Center"
+                    Text="Amount"
+                    VerticalOptions="Center" />
+
+            </Grid>
+            <listView:SfListView
+                x:Name="tramsactionHistoryList"
+                Grid.Row="2"
+                AllowSwiping="True"
+                ItemSize="50"
+                ItemsSource="{Binding TransactionHistoryList}"
+                SelectionBackgroundColor="Transparent"
+                SelectionMode="None">
+                <listView:SfListView.RightSwipeTemplate>
+                    <DataTemplate x:Name="RightSwipeTemplate">
+                        <Frame
+                            Margin="5"
+                            Padding="1"
+                            BackgroundColor="#DC595F"
+                            HorizontalOptions="Fill"
+                            VerticalOptions="Fill">
+                            <Grid HorizontalOptions="Center" VerticalOptions="Center">
+                                <Button
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    BackgroundColor="#DC595F"
+                                    Clicked="DeleteButtonClicked"
+                                    CommandParameter="{Binding .}"
+                                    Text="Delete"
+                                    TextColor="White" />
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </listView:SfListView.RightSwipeTemplate>
+                <listView:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame
+                                Margin="5"
+                                Padding="1"
+                                BackgroundColor="{Binding TransactionColor}"
+                                BorderColor="{Binding TransactionBorderColor}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label
+                                        Grid.Column="0"
+                                        FontSize="14"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding Date}"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        Grid.Column="1"
+                                        FontSize="14"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding Name}"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        Grid.Column="2"
+                                        FontSize="14"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding Company}"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        Grid.Column="3"
+                                        FontSize="14"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding Quantity}"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        Grid.Column="4"
+                                        FontSize="14"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding Price}"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        Grid.Column="5"
+                                        FontSize="14"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding Total}"
+                                        VerticalOptions="Center" />
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </listView:SfListView.ItemTemplate>
+            </listView:SfListView>
+            <!--  Indicator  -->
+            <busyindicator:SfBusyIndicator
+                Grid.Row="2"
+                AnimationType="Cupertino"
+                HorizontalOptions="CenterAndExpand"
+                IsBusy="{Binding IsBusy}"
+                IsVisible="{Binding IsBusy}"
+                VerticalOptions="CenterAndExpand"
+                ViewBoxHeight="50"
+                ViewBoxWidth="50" />
+
+            <AbsoluteLayout
+                Grid.Row="0"
+                Grid.RowSpan="3"
+                BackgroundColor="Black"
+                IsVisible="{Binding IsBusy}"
+                Opacity="0.4" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

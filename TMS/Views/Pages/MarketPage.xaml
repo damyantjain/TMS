@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="TMS.Views.Pages.MarketPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:listView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Label
+                Grid.Row="0"
+                FontAttributes="Bold"
+                FontSize="20"
+                HorizontalOptions="Center"
+                Text="Today's Price"
+                VerticalOptions="Center" />
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label
+                    Grid.Column="0"
+                    FontSize="14"
+                    HorizontalOptions="Center"
+                    Text="Company"
+                    VerticalOptions="Center" />
+                <Label
+                    Grid.Column="1"
+                    FontSize="14"
+                    HorizontalOptions="Center"
+                    Text="Max Price"
+                    VerticalOptions="Center" />
+                <Label
+                    Grid.Column="2"
+                    FontSize="14"
+                    HorizontalOptions="Center"
+                    Text="Min Price"
+                    VerticalOptions="Center" />
+                <Label
+                    Grid.Column="3"
+                    FontSize="14"
+                    HorizontalOptions="Center"
+                    Text="Closing"
+                    VerticalOptions="Center" />
+                <Label
+                    Grid.Column="4"
+                    FontSize="14"
+                    HorizontalOptions="Center"
+                    Text="Prev. Closing"
+                    VerticalOptions="Center" />
+            </Grid>
+            <listView:SfListView
+                x:Name="MarketList"
+                Grid.Row="2"
+                AllowSwiping="True"
+                ItemSize="50"
+                ItemsSource="{Binding MarketList}"
+                LoadMoreCommand="{Binding LoadMoreMarketListCommand}"
+                LoadMoreCommandParameter="{Binding Source={x:Reference MarketList}}"
+                LoadMoreOption="AutoOnScroll"
+                SelectionBackgroundColor="Transparent"
+                SelectionMode="None">
+                <listView:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame
+                                Margin="5"
+                                Padding="1"
+                                BackgroundColor="{Binding TransactionColor}"
+                                BorderColor="{Binding TransactionBorderColor}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label
+                                        Grid.Column="0"
+                                        FontSize="14"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding CompanyName}"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        Grid.Column="1"
+                                        FontSize="14"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding MaxPrice}"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        Grid.Column="2"
+                                        FontSize="14"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding MinPrice}"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        Grid.Column="3"
+                                        FontSize="14"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding ClosingPrice}"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        Grid.Column="4"
+                                        FontSize="14"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding PreviousClosing}"
+                                        VerticalOptions="Center" />
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </listView:SfListView.ItemTemplate>
+            </listView:SfListView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

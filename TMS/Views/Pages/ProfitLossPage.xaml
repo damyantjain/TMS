@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="TMS.Views.Pages.ProfitLossPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:listView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Label
+                Grid.Row="0"
+                FontAttributes="Bold"
+                FontSize="20"
+                HorizontalOptions="Center"
+                Text="Profit / Loss"
+                VerticalOptions="Center" />
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label
+                    Grid.Column="0"
+                    FontSize="14"
+                    HorizontalOptions="Center"
+                    Text="Date"
+                    VerticalOptions="Center" />
+                <Label
+                    Grid.Column="1"
+                    FontSize="14"
+                    HorizontalOptions="Center"
+                    Text="Company"
+                    VerticalOptions="Center" />
+                <Label
+                    Grid.Column="2"
+                    FontSize="14"
+                    HorizontalOptions="Center"
+                    Text="Name"
+                    VerticalOptions="Center" />
+                <Label
+                    Grid.Column="3"
+                    FontSize="14"
+                    HorizontalOptions="Center"
+                    Text="Price"
+                    VerticalOptions="Center" />
+            </Grid>
+            <listView:SfListView
+                x:Name="ProfitLossList"
+                Grid.Row="2"
+                ItemSize="50"
+                ItemsSource="{Binding ProfitLossList}"
+                SelectionBackgroundColor="Transparent"
+                SelectionMode="None">
+                <listView:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame
+                                Margin="5"
+                                Padding="1"
+                                BackgroundColor="{Binding TransactionColor}"
+                                BorderColor="{Binding TransactionBorderColor}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label
+                                        Grid.Column="0"
+                                        FontSize="14"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding Date}"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        Grid.Column="1"
+                                        FontSize="14"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding Company}"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        Grid.Column="2"
+                                        FontSize="14"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding Name}"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        Grid.Column="3"
+                                        FontSize="14"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding Price, StringFormat='{0:N}'}"
+                                        VerticalOptions="Center" />
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </listView:SfListView.ItemTemplate>
+            </listView:SfListView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

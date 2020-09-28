@@ -1,0 +1,459 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="TMS.Views.Pages.LandingPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ListCollection="clr-namespace:System.Collections.Generic;assembly=netstandard"
+    xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+    xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:local="clr-namespace:TMS.Core"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sfPicker="clr-namespace:Syncfusion.XForms.Pickers;assembly=Syncfusion.SfPicker.XForms"
+    xmlns:syncfusion="clr-namespace:Syncfusion.SfDataGrid.XForms;assembly=Syncfusion.SfDataGrid.XForms"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+        <Grid BackgroundColor="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <!--  Header  -->
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <ImageButton
+                    Grid.Column="0"
+                    Margin="10,5"
+                    BackgroundColor="White"
+                    Clicked="MenuButtonClicked"
+                    HeightRequest="35"
+                    Source="menu.png"
+                    WidthRequest="35" />
+                <Button
+                    Grid.Column="0"
+                    Grid.ColumnSpan="3"
+                    Margin="0"
+                    Padding="0"
+                    BackgroundColor="White"
+                    Clicked="HomeButtonClicked"
+                    FontAttributes="Bold"
+                    FontSize="25"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="PORTFOLIO"
+                    TextColor="#737373"
+                    VerticalOptions="Center"
+                    WidthRequest="180" />
+                <ImageButton
+                    Grid.Column="2"
+                    Margin="0,0,10,0"
+                    BackgroundColor="White"
+                    Clicked="HomeButtonClicked"
+                    HeightRequest="25"
+                    HorizontalOptions="End"
+                    Source="home.png"
+                    VerticalOptions="Center"
+                    WidthRequest="25" />
+
+            </Grid>
+
+            <!--  Actions  -->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Frame
+                    Grid.Column="0"
+                    Margin="5"
+                    Padding="2"
+                    BorderColor="Black"
+                    CornerRadius="0"
+                    HeightRequest="50">
+                    <combobox:SfComboBox
+                        x:Name="NamePicker"
+                        Margin="0"
+                        HeightRequest="40"
+                        SelectedItem="{Binding SelectedNameValue}"
+                        SelectionChanged="UserSelectionChanged"
+                        Watermark="Name">
+                        <combobox:SfComboBox.ComboBoxSource>
+                            <ListCollection:List x:TypeArguments="x:String">
+                                <x:String>Damyant</x:String>
+                                <x:String>Manisha</x:String>
+                                <x:String>Kishan</x:String>
+                                <x:String>Test</x:String>
+                            </ListCollection:List>
+                        </combobox:SfComboBox.ComboBoxSource>
+                    </combobox:SfComboBox>
+                </Frame>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <ImageButton
+                        Grid.Column="0"
+                        Padding="5"
+                        BackgroundColor="White"
+                        Clicked="PlusButtonClicked"
+                        HeightRequest="25"
+                        Source="plus.png"
+                        WidthRequest="25" />
+                    <ImageButton
+                        Grid.Column="1"
+                        Padding="5"
+                        BackgroundColor="White"
+                        Clicked="MinusButtonClicked"
+                        HeightRequest="25"
+                        Source="minus.png"
+                        WidthRequest="25" />
+                </Grid>
+            </Grid>
+
+            <Grid
+                Grid.Row="2"
+                Padding="2"
+                BackgroundColor="Gray"
+                ColumnSpacing="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Frame
+                    Grid.Column="0"
+                    Padding="10,10,0,10"
+                    BorderColor="Gray">
+                    <StackLayout Orientation="Horizontal">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            Text="Bal. :" />
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            IsVisible="{Binding IsBalanceLabelVisible}"
+                            Text="{Binding Balance, StringFormat='{0:N}'}" />
+                        <Entry
+                            Margin="0"
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            HorizontalOptions="StartAndExpand"
+                            IsVisible="{Binding IsBalanceEditable}"
+                            Keyboard="Numeric"
+                            Text="{Binding AddBalance}"
+                            WidthRequest="70" />
+                        <ImageButton
+                            Margin="0,0,5,0"
+                            BackgroundColor="Transparent"
+                            Clicked="EditButtonClicked"
+                            HeightRequest="20"
+                            HorizontalOptions="EndAndExpand"
+                            IsVisible="{Binding IsBalanceLabelVisible}"
+                            Source="plus.png"
+                            WidthRequest="20" />
+                        <ImageButton
+                            Margin="0,0,5,0"
+                            BackgroundColor="Transparent"
+                            Clicked="TickButtonClicked"
+                            HeightRequest="20"
+                            HorizontalOptions="EndAndExpand"
+                            IsVisible="{Binding IsBalanceEditable}"
+                            Source="tick.png"
+                            WidthRequest="20" />
+                    </StackLayout>
+                </Frame>
+                <Frame
+                    Grid.Column="1"
+                    Padding="10,10,0,10"
+                    BorderColor="Gray">
+                    <StackLayout Orientation="Horizontal">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            Text="Net W. :" />
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            Text="{Binding NetWorth, StringFormat='{0:N}'}" />
+                    </StackLayout>
+                </Frame>
+            </Grid>
+
+            <!--  Table  -->
+            <syncfusion:SfDataGrid
+                x:Name="dataGrid"
+                Grid.Row="3"
+                AllowPullToRefresh="True"
+                AlternationCount="2"
+                AutoGenerateColumns="False"
+                ColumnSizer="Star"
+                GridStyle="{StaticResource customStyle}"
+                IsVisible="{Binding DataShown}"
+                ItemsSource="{Binding AverageTable}"
+                PullToRefreshCommand="{Binding RefreshPortfolioDataCommand}">
+                <syncfusion:SfDataGrid.Resources>
+                    <ResourceDictionary>
+                        <local:CustomDataGridStyle x:Key="customStyle" />
+                    </ResourceDictionary>
+                </syncfusion:SfDataGrid.Resources>
+                <syncfusion:SfDataGrid.Columns x:TypeArguments="syncfusion:Columns">
+                    <syncfusion:GridTextColumn
+                        Padding="5,0,0,0"
+                        CellTextSize="16"
+                        HeaderCellTextSize="16"
+                        HeaderFontAttribute="Bold"
+                        HeaderText="Company"
+                        HeaderTextAlignment="Center"
+                        LineBreakMode="WordWrap"
+                        MappingName="ShareName"
+                        TextAlignment="Center" />
+                    <syncfusion:GridNumericColumn
+                        Padding="5,0,0,0"
+                        CellTextSize="16"
+                        HeaderCellTextSize="16"
+                        HeaderFontAttribute="Bold"
+                        HeaderText="Quantity"
+                        HeaderTextAlignment="Center"
+                        LineBreakMode="WordWrap"
+                        MappingName="Quantity"
+                        NumberDecimalDigits="0"
+                        TextAlignment="Center" />
+                    <syncfusion:GridNumericColumn
+                        Padding="5,0,0,0"
+                        CellTextSize="16"
+                        HeaderCellTextSize="16"
+                        HeaderFontAttribute="Bold"
+                        HeaderText="Avg. Price"
+                        HeaderTextAlignment="Center"
+                        LineBreakMode="WordWrap"
+                        MappingName="AveragePrice"
+                        NumberDecimalDigits="2"
+                        TextAlignment="Center" />
+                    <syncfusion:GridNumericColumn
+                        Padding="5,0,0,0"
+                        CellTextSize="16"
+                        HeaderCellTextSize="16"
+                        HeaderFontAttribute="Bold"
+                        HeaderText="Total Price"
+                        HeaderTextAlignment="Center"
+                        LineBreakMode="WordWrap"
+                        MappingName="TotalPrice"
+                        NumberDecimalDigits="2"
+                        TextAlignment="Center" />
+                </syncfusion:SfDataGrid.Columns>
+            </syncfusion:SfDataGrid>
+
+
+            <!--  Buy/Sell Page  -->
+            <Grid
+                Grid.Row="3"
+                Padding="10,40,40,100"
+                BackgroundColor="GhostWhite"
+                IsVisible="{Binding BuySellPage}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Padding="10,0,0,0"
+                    FontAttributes="Bold"
+                    FontSize="32"
+                    HorizontalOptions="StartAndExpand"
+                    IsVisible="{Binding BuyPressed}"
+                    Text="BUY"
+                    TextColor="#4287f5" />
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Padding="10,0,0,0"
+                    FontAttributes="Bold"
+                    FontSize="32"
+                    HorizontalOptions="StartAndExpand"
+                    IsVisible="{Binding SellPressed}"
+                    Text="SELL"
+                    TextColor="#4287f5" />
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    FontSize="18"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="Date - "
+                    VerticalOptions="CenterAndExpand" />
+                <sfPicker:SfDatePicker
+                    x:Name="datePicker"
+                    DateSelected="Datepicker_DateSelected"
+                    Format="dd_MMM_yyyy"
+                    HorizontalOptions="CenterAndExpand"
+                    PickerHeight="300"
+                    PickerMode="Dialog"
+                    PickerWidth="300"
+                    ShowFooter="True"
+                    VerticalOptions="CenterAndExpand" />
+                <Label
+                    x:Name="BuyDateLabel"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    FontSize="18"
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="CenterAndExpand">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="SelectDate" />
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    FontSize="18"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="Name -"
+                    VerticalOptions="CenterAndExpand" />
+                <combobox:SfComboBox
+                    x:Name="NameComboBox"
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    AllowFiltering="True"
+                    HeightRequest="40"
+                    HorizontalOptions="CenterAndExpand"
+                    SelectedItem="{Binding BuySellNameSelectedValue}"
+                    VerticalOptions="CenterAndExpand">
+                    <combobox:SfComboBox.ComboBoxSource>
+                        <ListCollection:List x:TypeArguments="x:String">
+                            <x:String>Damyant</x:String>
+                            <x:String>Manisha</x:String>
+                            <x:String>Kishan</x:String>
+                            <x:String>Test</x:String>
+                        </ListCollection:List>
+                    </combobox:SfComboBox.ComboBoxSource>
+                </combobox:SfComboBox>
+                <Label
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    FontSize="18"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="Share Name - "
+                    VerticalOptions="CenterAndExpand" />
+
+                <!--<Entry
+                    x:Name="BuyShareNameLabel"
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    FontSize="18"
+                    Text="{Binding ShareName}"
+                    VerticalOptions="CenterAndExpand" />-->
+                <combobox:SfComboBox
+                    x:Name="BuyShareNameLabel"
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    AllowFiltering="True"
+                    DataSource="{Binding ShareNameList}"
+                    DisplayMemberPath="StockName"
+                    HeightRequest="40"
+                    IsEditableMode="True"
+                    SelectedItem="{Binding ShareNameSelectedItem}"
+                    Text="{Binding ShareName}"
+                    VerticalOptions="CenterAndExpand" />
+
+                <Label
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    FontSize="18"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="Quantity - "
+                    VerticalOptions="CenterAndExpand" />
+
+                <Entry
+                    x:Name="BuyQuantityLabel"
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    FontSize="18"
+                    Keyboard="Numeric"
+                    Text="{Binding Quantity}"
+                    VerticalOptions="CenterAndExpand" />
+
+                <Label
+                    Grid.Row="5"
+                    Grid.Column="0"
+                    FontSize="18"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="Price - "
+                    VerticalOptions="CenterAndExpand" />
+                <Entry
+                    x:Name="BuyPriceLabel"
+                    Grid.Row="5"
+                    Grid.Column="1"
+                    FontSize="18"
+                    Keyboard="Numeric"
+                    Text="{Binding Price}"
+                    VerticalOptions="CenterAndExpand" />
+
+                <Button
+                    Grid.Row="6"
+                    Grid.Column="1"
+                    Margin="10"
+                    BackgroundColor="#0bb538"
+                    Clicked="SubmitBuyClicked"
+                    CornerRadius="25"
+                    IsVisible="{Binding BuyPressed}"
+                    Text="Submit" />
+                <Button
+                    Grid.Row="6"
+                    Grid.Column="1"
+                    Margin="10"
+                    BackgroundColor="#0bb538"
+                    Clicked="SubmitSellClicked"
+                    CornerRadius="25"
+                    IsVisible="{Binding SellPressed}"
+                    Text="Submit" />
+                <Label
+                    Grid.Row="7"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    FontSize="14"
+                    HorizontalOptions="Center"
+                    IsVisible="{Binding IsValidationMessageVisible}"
+                    Text="{Binding ValidationMessage}"
+                    TextColor="#c21328"
+                    VerticalOptions="Center" />
+
+            </Grid>
+
+            <!--  Indicator  -->
+            <busyindicator:SfBusyIndicator
+                Grid.Row="3"
+                AnimationType="Cupertino"
+                HorizontalOptions="CenterAndExpand"
+                IsBusy="{Binding IsBusy}"
+                IsVisible="{Binding IsBusy}"
+                VerticalOptions="CenterAndExpand"
+                ViewBoxHeight="50"
+                ViewBoxWidth="50" />
+
+            <AbsoluteLayout
+                Grid.Row="0"
+                Grid.RowSpan="4"
+                BackgroundColor="Black"
+                IsVisible="{Binding IsBusy}"
+                Opacity="0.4" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

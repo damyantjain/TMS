@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage
+    x:Class="TMS.Views.Popup.MenuPopup"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    mc:Ignorable="d">
+    <pages:PopupPage.Animation>
+        <animations:MoveAnimation
+            DurationIn="400"
+            DurationOut="400"
+            PositionIn="Left"
+            PositionOut="Left" />
+    </pages:PopupPage.Animation>
+    <Frame Padding="5,15" BackgroundColor="OldLace">
+        <syncfusion:SfListView
+            x:Name="menuListView"
+            ItemSize="50"
+            ItemsSource="{Binding MenuList}"
+            SelectionBackgroundColor="#2a75b7"
+            SelectionChanged="Menu_SelectionChanged">
+            <syncfusion:SfListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="10,0" HorizontalOptions="FillAndExpand">
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                FontSize="18"
+                                HorizontalOptions="CenterAndExpand"
+                                Text="{Binding .}"
+                                TextColor="#444444"
+                                VerticalOptions="Center" />
+                            <BoxView
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Margin="0"
+                                HeightRequest="1"
+                                Opacity="0.5"
+                                VerticalOptions="EndAndExpand"
+                                Color="#2a75b7" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </syncfusion:SfListView.ItemTemplate>
+        </syncfusion:SfListView>
+    </Frame>
+</pages:PopupPage>
