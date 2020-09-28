@@ -1,7 +1,11 @@
 ﻿namespace TMS
 {
     using GalaSoft.MvvmLight.Ioc;
+    using Newtonsoft.Json;
+    using System.IO;
+    using System.Reflection;
     using TMS.Core;
+    using TMS.Model;
     using TMS.Services;
     using TMS.ViewModel;
     using TMS.Views.Pages;
@@ -13,7 +17,6 @@
     /// <seealso cref="Xamarin.Forms.Application" />
     public partial class App : Application
     {
-
         /// <summary>
         /// The view model locator
         /// </summary>
@@ -79,7 +82,14 @@
         /// </summary>
         private void Initialize()
         {
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(Constants.SyncfusionKey);
+            var assembly = IntrospectionExtensions.GetTypeInfo(typeof(App)).Assembly;
+            Stream stream = assembly.GetManifestResourceStream("TMS.Core.Config.json");
+            using (var reader = new StreamReader(stream))
+            {
+                var json = reader.ReadToEnd();
+                Constants.AppConfiguration = JsonConvert.DeserializeObject<AppConfiguration>(json);
+            }
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(Constants.AppConfiguration.SyncfusionKey);
         }
 
         /// <summary>

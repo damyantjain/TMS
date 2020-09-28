@@ -21,7 +21,7 @@
         /// <summary>
         /// The firebase
         /// </summary>
-        private readonly FirebaseClient firebase = new FirebaseClient(Constants.FireBaseUrl);
+        private readonly FirebaseClient firebase = new FirebaseClient(Constants.AppConfiguration.FireBaseUrl);
 
         /// <summary>
         /// Setups the aws connection.
@@ -91,7 +91,7 @@
         /// <returns></returns>
         public async Task<Average> GetSpecificTotalAverageData(string shareName)
         {
-            string url = $"{Constants.FireBaseUrl}{Constants.TableNameAllAverage}{Constants.ForwardSlash}{shareName}{Constants.DotJson}";
+            string url = $"{Constants.AppConfiguration.FireBaseUrl}{Constants.TableNameAllAverage}{Constants.ForwardSlash}{shareName}{Constants.DotJson}";
             using (var client = new HttpClient())
             {
                 var result = await client.GetStringAsync(url);
@@ -108,7 +108,7 @@
         /// <returns></returns>
         public async Task<Average> GetSpecificAverageData(string userName, string stockName)
         {
-            string url = $"{Constants.FireBaseUrl}{Constants.TableNameAverage}{Constants.ForwardSlash}{userName}{Constants.ForwardSlash}{stockName}{Constants.DotJson}";
+            string url = $"{Constants.AppConfiguration.FireBaseUrl}{Constants.TableNameAverage}{Constants.ForwardSlash}{userName}{Constants.ForwardSlash}{stockName}{Constants.DotJson}";
             using (var client = new HttpClient())
             {
                 var result = await client.GetStringAsync(url);
@@ -270,7 +270,7 @@
 
         public async Task<Balance> GetPreviousBalanceDetails(string userName)
         {
-            string url = $"{Constants.FireBaseUrl}{Constants.TableNameBalance}{Constants.ForwardSlash}{userName}{Constants.DotJson}";
+            string url = $"{Constants.AppConfiguration.FireBaseUrl}{Constants.TableNameBalance}{Constants.ForwardSlash}{userName}{Constants.DotJson}";
             using (var client = new HttpClient())
             {
                 var result = await client.GetStringAsync(url);
